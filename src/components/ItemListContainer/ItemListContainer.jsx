@@ -1,0 +1,93 @@
+import React, { useEffect, useState } from "react";
+import ItemList from "../Card/CardList/ItemList";
+import { useParams } from "react-router-dom";
+
+const files = [
+  {
+    id: 1,
+    image:
+      "https://www.tradeinn.com/f/13887/138875097/nike-guantes-tg-club-fleece-2.0-printed.jpg",
+    title: "Guantes Nike",
+    category: "Uppergarment",
+  },
+  {
+    id: 2,
+    image:
+      "https://www.tradeinn.com/f/13847/138479794/nike-zapatillas-running-revolution-6-nn.jpg",
+    title: "Zapatillas Nike",
+    category: "Lowergarment",
+  },
+  {
+    id: 3,
+    image:
+      "https://www.tradeinn.com/f/13748/137483200/nike-camiseta-manga-corta-dri-fit-miler.jpg",
+    title: "Remera Nike",
+    category: "Uppergarment",
+  },
+  {
+    id: 4,
+    image:
+      "https://www.tradeinn.com/f/13871/138712842/nike-chaqueta-eintracht-frankfurt-awf-22-23.jpg",
+    title: "Campera Nike",
+    category: "Uppergarment",
+  },
+  {
+    id: 5,
+    image:
+      "https://www.tradeinn.com/h/13748/137483178/nike-calcetines-multiplier-crew-2-pares.jpg",
+    title: "Medias Nike",
+    category: "Lowergarment",
+  },
+  {
+    id: 6,
+    image:
+      "https://www.tradeinn.com/f/13870/138706923/nike-pantalones-cortos-dri-fit-stride-5.jpg",
+    title: "Short Nike",
+    category: "Lowergarment",
+  },
+  {
+    id: 7,
+    image:
+      "https://www.tradeinn.com/f/13883/138839377/nike-botas-futbol-tiempo-legend-ix-pro-fg.jpg",
+    title: "Botines Nike",
+    category: "Lowergarment",
+  },
+  {
+    id: 8,
+    image:
+      "https://www.tradeinn.com/f/13871/138712812/nike-polo-manga-corta-paris-saint-germain-nsw-22-23.jpg",
+    title: "Camiseta Nike",
+    category: "Uppergarment",
+  },
+];
+
+function ItemListContainer() {
+  const [data, setData] = useState([]);
+
+  const { categoriaId } = useParams();
+
+  useEffect(() => {
+    const getData = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(files);
+      }, 1000);
+    });
+
+    if (categoriaId) {
+      getData.then((res) =>
+        setData(res.filter((files) => files.category === categoriaId))
+      );
+    } else {
+      getData.then((res) => setData(res));
+    }
+  }, [categoriaId]);
+
+  return (
+    <>
+      <h1>ACA VA EL TITULO</h1>
+      <ItemList data={data} />
+    </>
+  );
+}
+
+export default ItemListContainer;
