@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-const CartContext = React.createContext([]);
+export const CartContext = React.createContext([]);
 
 export const useCartContext = () => useContext(CartContext);
 
-const CartProvider = ({ Children }) => {
+const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addProduct = (item, quantity) => {
@@ -11,7 +11,7 @@ const CartProvider = ({ Children }) => {
       setCart(
         cart.map((product) => {
           return product.id === item.id
-            ? { ...product, quantity: product.quantity + quantity }
+            ? { ...(product.quantity + quantity) }
             : product;
         })
       );
@@ -37,8 +37,9 @@ const CartProvider = ({ Children }) => {
         addProduct,
       }}
     >
-      {Children}
+      {children}
     </CartContext.Provider>
   );
 };
+
 export default CartProvider;

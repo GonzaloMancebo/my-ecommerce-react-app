@@ -1,7 +1,6 @@
 import React from "react";
 import "../CardItem/Item.css";
 import { Link } from "react-router-dom";
-import CartProvider from "../../../CartContext/CartProvider";
 
 function Item({ info }) {
   return (
