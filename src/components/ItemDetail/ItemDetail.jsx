@@ -18,6 +18,12 @@ function ItemDetail({ data }) {
         <img className="detail_image" src={data.image} alt="" />
         <div className="content">
           <h2>{data.title}</h2>
+          <hr />
+
+          <p> " {data.description} "</p>
+          <br />
+          <p> $ {data.price}</p>
+
           {goToCart ? (
             <Link to="/cart">Terminar Compra</Link>
           ) : (
