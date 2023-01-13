@@ -27,7 +27,7 @@ function ItemDetail({ data }) {
           {goToCart ? (
             <Link to="/cart">Terminar Compra</Link>
           ) : (
-            <ItemCount initial={3} stock={5} onAdd={onAdd} />
+            <ItemCount initial={0} stock={5} onAdd={onAdd} />
           )}
         </div>
       </div>
