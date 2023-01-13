@@ -17,15 +17,18 @@ function ItemDetail({ data }) {
       <div className="detail">
         <img className="detail_image" src={data.image} alt="" />
         <div className="content">
-          <h2>{data.title}</h2>
+          <h2 className="title_detalle font-weight-bold">{data.title}</h2>
           <hr />
 
-          <p> " {data.description} "</p>
+          <p className="parrafo_detalle"> " {data.description} "</p>
           <br />
-          <p> $ {data.price}</p>
-
+          <p className="parrafo_price font-weight-bold">  $ {data.price} </p>
+          <br/>
+          <br/>
           {goToCart ? (
-            <Link to="/cart">Terminar Compra</Link>
+            
+            <Link to="/cart" className="parrafo_click">Hace click para generar tu compra!</Link>
+            
           ) : (
             <ItemCount initial={0} stock={5} onAdd={onAdd} />
           )}

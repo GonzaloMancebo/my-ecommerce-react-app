@@ -1,10 +1,32 @@
-.film{
-    display: block;
-    width: 300px;
+.film {
+  display: block;
+  width: 300px;
+  text-decoration: none;
+  color: black;
 }
 
 .film img {
-    width: 80%;
-    height: 80%;
-    object-fit: cover;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.film_conteiner {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, 300px 200px);
+ gap: 20px;
+ padding: 20px;
+}
+
+.film_container_parrafo {
+  font-style: italic;
+}
+
+.film_container_title { 
+  text-align: center;
+}
+
+.film_container_price{
+  text-align: center;
+
 }

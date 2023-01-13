@@ -1,31 +1,12 @@
 import React, { useState } from "react";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-  getDoc,
-  setDoc,
-} from "firebase/firestore";
-
-const db = getFirestore();
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { useCartContext } from "../CartContext/CartProvider";
+import "../Forms/FormsCart.css";
 
 function FormsCart() {
-  const valorInitial = {
-    name: "",
-    surname: "",
-    inputEmail: "",
-    inputAddress: "",
-    inputAddress2: "",
-    inputCity: "",
-    inputState: "",
-    inputZip: "",
-  };
-
-  const [user, setUser] = useState(valorInitial);
-
+  const { cart, totalPrice } = useCartContext();
+  const [user, setUser] = useState({});
+  console.log(user);
   const captureInputs = (e) => {
     const { name, value } = e.target;
 
@@ -34,22 +15,25 @@ function FormsCart() {
 
   const saveData = async (e) => {
     e.preventDefault();
-
     try {
-      await addDoc(collection(db, "ordenes"), {
-        ...user,
-      });
+      const db = getFirestore();
+      let orden = {
+        user,
+        cart: cart,
+        date: new Date(),
+        total: totalPrice(),
+      };
+      const res = await addDoc(collection(db, "ordenes"), orden);
+      console.log(res.id);
     } catch (error) {
       console.log(error);
     }
-
-    setUser({ ...valorInitial });
   };
 
   return (
     <form onSubmit={saveData}>
-      <div className="form-row">
-        <div className="form-group col-md-6">
+      <div>
+        <div>
           <label for="inputname">Nombre</label>
           <input
             type="text"
@@ -57,10 +41,11 @@ function FormsCart() {
             id="name"
             placeholder="Ingresa tu Nombre"
             onChange={captureInputs}
-            value={user.name}
+            name="name"
           />
         </div>
-        <div className="form-group col-md-6">
+        <br />
+        <div>
           <label for="surname">Apellido</label>
           <input
             type="text"
@@ -68,11 +53,11 @@ function FormsCart() {
             id="surname"
             placeholder="Ingresa tu Apellido"
             onChange={captureInputs}
-            value={user.surname}
+            name="surname"
           />
         </div>
-
-        <div className="form-group col-md-6">
+        <br />
+        <div>
           <label for="inputEmail">Email</label>
           <input
             type="email"
@@ -80,11 +65,11 @@ function FormsCart() {
             id="inputEmail"
             placeholder="Ingresa tu email"
             onChange={captureInputs}
-            value={user.inputEmail}
+            name="inputEmail"
           />
         </div>
       </div>
-
+      <br />
       <div className="form-group">
         <label for="inputAddress">Direccion</label>
         <input
@@ -93,9 +78,10 @@ function FormsCart() {
           id="inputAddress"
           placeholder="Calle falsa 123"
           onChange={captureInputs}
-          value={user.inputAddress}
+          name="inputAddress"
         />
       </div>
+      <br />
       <div className="form-group">
         <label for="inputAddress2">Entre Calles</label>
         <input
@@ -104,40 +90,44 @@ function FormsCart() {
           id="inputAddress2"
           placeholder="Entre Maradona y Messi"
           onChange={captureInputs}
-          value={user.inputAddress2}
+          name="inputAddress2"
         />
       </div>
+      <br />
       <div className="form-row">
-        <div className="form-group col-md-6">
+        <div>
           <label for="inputCity">Ciudad</label>
           <input
             type="text"
             className="form-control"
             id="inputCity"
             onChange={captureInputs}
-            value={user.inputCity}
+            name="inputCity"
           />
         </div>
-        <div className="form-group col-md-6">
+        <br />
+        <div>
           <label for="inputState">Barrio</label>
           <input
             type="text"
             className="form-control"
             id="inputState"
             onChange={captureInputs}
-            value={user.inputState}
+            name="inputState"
           />
         </div>
-        <div className="form-group col-md-2">
+        <br />
+        <div>
           <label for="inputZip">Codigo Postal</label>
           <input
             type="text"
             className="form-control"
             id="inputZip"
             onChange={captureInputs}
-            value={user.inputZip}
+            name="inputZip"
           />
         </div>
+        <br />
       </div>
       <div className="form-group">
         <div className="form-check">
@@ -147,7 +137,10 @@ function FormsCart() {
           </label>
         </div>
       </div>
-      <button className="btn btn-primary">Generar Orden</button>
+      <br />
+      <button className="button" type="submit">
+        Generar Orden
+      </button>
     </form>
   );
 }

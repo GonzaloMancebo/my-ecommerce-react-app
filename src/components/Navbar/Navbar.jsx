@@ -1,18 +1,19 @@
 import React from "react";
 import CardWidget from "../CardWidget/CardWidget";
 import { NavLink } from "react-router-dom";
+import "../Navbar/Navbar.css";
 
 function Navbar() {
   return (
     <>
-      <div>
+      <div className="topnav">
         <nav>
-          <div>
-            <NavLink className="nav_link" to="/">
-              Logo
-            </NavLink>
-          </div>
           <ul>
+            <li>
+              <NavLink className="nav_link" to="/">
+                Inicio
+              </NavLink>
+            </li>
             <li>
               <NavLink className="nav_link" to="/categoria/Uppergarment">
                 Upper garment

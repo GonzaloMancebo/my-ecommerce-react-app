@@ -3,16 +3,23 @@ import { Link } from "react-router-dom";
 import { useCartContext } from "../../CartContext/CartProvider";
 import FormsCart from "../../Forms/FormsCart";
 import CartItem from "./CartItem";
+import "../Cart/CartItem.css";
 
-const Cart = () => {
+export const Cart = () => {
   const { cart, totalPrice } = useCartContext();
-
 
   if (cart.length === 0) {
     return (
       <>
-        <p>No hay articulos en el carrito</p>
-        <Link to="/">Hacer compras mi rey</Link>
+        <div className="cart_vacio">
+          <p>No hay articulos en el carrito 😨</p>
+          <br />
+          <br />
+          <br />
+          <Link className="cart_compra" to="/">
+            Hace click para iniciar tu compra!
+          </Link>
+        </div>
       </>
     );
   }
@@ -24,8 +31,8 @@ const Cart = () => {
       ))}
 
       <FormsCart />
-      <p>TOTAL: $ {totalPrice()}</p>
-
+      <br/>
+      <p className="total_parrafo">TOTAL: $ {totalPrice()}</p>
     </>
   );
 };

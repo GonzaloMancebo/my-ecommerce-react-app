@@ -9,3 +9,42 @@
   width: 200px;
   margin-right: 1rem;
 }
+
+.conteiner_cart {
+  text-align: center;
+  text-decoration: none;
+  height: 300px;
+  width: 300px;
+  background-color: #111;
+  padding: 70px 70px;
+  border: solid;
+  border-radius: 5%;
+  margin-left: 37.5%;
+  margin-top: 10%;
+}
+
+.cart_vacio{
+  text-align: center;
+  text-decoration: none;
+  height: 250px;
+  width: 250px;
+  background-color: #1258;
+  padding: 30px 70px;
+  border: solid;
+  border-radius: 5%;
+  margin-left: 37.5%;
+  margin-top: 10%;
+  color: white;
+}
+
+.cart_compra:hover {
+  background-color: #111;
+}
+.cart_compra{
+  text-decoration: none;
+  color: white;
+  }
+
+  .total_parrafo{
+    text-align: center;
+  }
